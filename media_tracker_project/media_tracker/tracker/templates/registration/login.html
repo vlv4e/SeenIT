@@ -3,11 +3,51 @@
 {% block title %}Login{% endblock %}
 
 {% block content %}
-<h2>Login</h2>
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Login</button>
-</form>
-<p><a href="{% url 'register' %}">Register</a></p>
+<style>
+    /* Login Container Styles */
+    .login-container {
+        max-width: 400px; /* Maximum width */
+        margin: 50px auto; /* Center horizontally with top margin */
+        padding: 20px; /* Inner spacing */
+        background-color: #ffffff; /* White background */
+        border-radius: 10px; /* Rounded corners */
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Soft shadow */
+        text-align: center; /* Center text */
+    }
+
+    /* Button Styles */
+    .login-container button {
+        background-color: #327d87; /* Button background */
+        color: #ffffff; /* Button text color */
+        border: none;
+        padding: 10px 15px;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .login-container button:hover {
+        background-color: #2a646d; /* Darker shade on hover */
+    }
+
+    /* Link Styles */
+    .login-container p a {
+        color: #284763; /* Link color */
+        text-decoration: none;
+    }
+
+    .login-container p a:hover {
+        text-decoration: underline; /* Underline on hover */
+    }
+</style>
+
+<div class="login-container">
+    <h2>Login</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Login</button>
+    </form>
+    <p><a href="{% url 'register' %}">Register</a></p>
+</div>
 {% endblock %}
