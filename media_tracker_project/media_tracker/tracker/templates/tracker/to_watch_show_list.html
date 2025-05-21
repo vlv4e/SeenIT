@@ -1,0 +1,64 @@
+{% extends 'tracker/base.html' %}
+
+{% block title %}To Watch Shows{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1 class="text-center">To Watch Shows</h1>
+
+    <!-- Add Show Button -->
+    <button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target="#addShowModal">
+        Add New Show
+    </button>
+
+    <!-- Add Show Modal -->
+    <div class="modal fade" id="addShowModal" tabindex="-1" role="dialog" aria-labelledby="addShowModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addShowModalLabel">Add New Show</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form method="post">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <button type="submit" class="btn btn-primary">Add Show</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- To Watch Shows List -->
+    <h2>Shows to Watch</h2>
+    <div class="row">
+        {% for show in to_watch_shows %}
+            <div class="col-md-4">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ show.title }}</h5>
+                        {% if show.duration %}
+                            <p class="card-text">Duration: {{ show.duration }} mins</p>
+                        {% endif %}
+                        {% if show.notes %}
+                            <p class="card-text">Notes: {{ show.notes }}</p>
+                        {% endif %}
+                        <a href='{% url 'to_watch_show_update' show.pk %}' class="btn btn-warning">Edit</a>
+                        <form action='{% url 'to_watch_show_delete' show.pk %}' method='post' class="d-inline">
+                            {% csrf_token %}
+                            <button type='submit' class="btn btn-danger">Delete</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        {% empty %}
+            <div class="col-12">
+                <p class="text-center">No shows in the To Watch list yet.</p>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

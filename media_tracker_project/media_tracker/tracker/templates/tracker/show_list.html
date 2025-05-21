@@ -1,0 +1,41 @@
+{% extends 'tracker/base.html' %}
+
+{% block title %}Show List{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1 class="text-center">Your Shows</h1>
+    <a href='{% url 'show_create' %}' class="btn btn-primary mb-3">Add Show</a>
+    <div class="row">
+        {% for show in shows %}
+            <div class="col-md-4">
+                <div class="card mb-4">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">{{ show.title }}</h5>
+                        <p class="card-text">{{ show.duration }} mins</p>
+                        <a href='{% url 'show_update' show.pk %}' class="btn btn-warning">Edit</a>
+                        <form action='{% url 'show_delete' show.pk %}' method='post' class="d-inline">
+                            {% csrf_token %}
+                            <button type='submit' class="btn btn-danger">Delete</button>
+                        </form>
+                        <form action='{% url 'show_favorite' show.pk %}' method='post' class="d-inline">
+                            {% csrf_token %}
+                            <button type='submit' class="btn btn-outline-warning">
+                                {% if show.is_favorite %}
+                                    Unfavorite
+                                {% else %}
+                                    Favorite
+                                {% endif %}
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        {% empty %}
+            <div class="col-12">
+                <p class="text-center">No shows added yet.</p>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends 'tracker/base.html' %}
+
+{% block title %}Favorite Movies{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1 class="text-center">Your Favorite Movies</h1>
+    <div class="row">
+        {% for movie in movies %}
+            <div class="col-md-4">
+                <div class="card mb-4">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">{{ movie.title }}</h5>
+                        <p class="card-text">{{ movie.duration }} mins</p>
+                        <form action='{% url 'movie_favorite' movie.pk %}' method='post' class="d-inline">
+                            {% csrf_token %}
+                            <button type='submit' class="btn btn-outline-warning">
+                                {% if movie.is_favorite %}
+                                    Unfavorite
+                                {% else %}
+                                    Favorite
+                                {% endif %}
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        {% empty %}
+            <div class="col-12">
+                <p class="text-center">No favorite movies added yet.</p>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

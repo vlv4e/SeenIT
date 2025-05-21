@@ -1,0 +1,150 @@
+{% extends 'tracker/base.html' %}
+{% load static %}
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<div class="container mt-5">  <!-- Increased margin-top -->
+    <h2 class="text-center mb-4" style="color: #2d6275;">Welcome, {{ user.username }}!</h2>  <!-- Added margin-bottom -->
+
+    <div class="row statistics mb-5">  <!-- Increased margin-bottom -->
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <div class="card-body text-center">
+                    <h3 style="color: #2d6275;">Movies Watched</h3>
+                    <p class="display-4" style="color: #38999a;">{{ total_movies }}</p>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-body text-center">
+                    <h3 style="color: #2d6275;">Shows Watched</h3>
+                    <p class="display-4" style="color: #38999a;">{{ total_shows }}</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card mb-4 h-100">  <!-- Added h-100 -->
+                <div class="card-body">
+                    <h3 class="text-center" style="color: #2d6275;">Overall Media Statistics</h3>
+                    <canvas id="myPieChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card mb-4 h-100">  <!-- Added h-100 -->
+                <div class="card-body">
+                    <h3 class="text-center" style="color: #2d6275;">Daily Movies and Shows Watched</h3>
+                    <canvas id="myBarChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Bar Chart for Daily Movies and Shows Watched
+    const ctxBar = document.getElementById('myBarChart').getContext('2d');
+    const dailyData = {
+        labels: {{ daily_stats.dates|safe }},
+        datasets: [
+            {
+                label: 'Movies Watched',
+                data: {{ daily_stats.movies|safe }},
+                backgroundColor: 'rgba(56, 153, 154, 0.6)', // Teal
+                borderColor: '#38999a',
+                borderWidth: 1
+            },
+            {
+                label: 'Shows Watched',
+                data: {{ daily_stats.shows|safe }},
+                backgroundColor: 'rgba(45, 98, 117, 0.6)', // Darker Blue-Green
+                borderColor: '#2d6275',
+                borderWidth: 1
+            }
+        ]
+    };
+
+    const myBarChart = new Chart(ctxBar, {
+        type: 'bar',
+        data: dailyData,
+        options: {
+            responsive: true,
+            maintainAspectRatio: true,  // Added maintainAspectRatio
+            aspectRatio: 1.2,  // Adjusted aspectRatio
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    title: {
+                        display: true,
+                        text: 'Number of Shows/Movies Watched',
+                        color: '#284763'
+                    },
+                    ticks: {
+                        color: '#284763'
+                    }
+                },
+                x: {
+                    title: {
+                        display: true,
+                        text: 'Days',
+                        color: '#284763'
+                    },
+                    ticks: {
+                        color: '#284763'
+                    }
+                }
+            },
+            plugins: {
+                legend: {
+                    labels: {
+                        color: '#284763'
+                    }
+                },
+                title: {
+                    display: true,
+                    text: 'Daily Movies and Shows Watched',
+                    color: '#284763'
+                }
+            }
+        }
+    });
+
+    // Pie Chart for Overall Media Statistics
+    const ctxPie = document.getElementById('myPieChart').getContext('2d');
+    const overallData = {
+        labels: ['Total Movies', 'Total Shows'],
+        datasets: [{
+            label: 'Media Statistics',
+            data: [{{ total_movies }}, {{ total_shows }}],
+            backgroundColor: ['#38999a', '#2d6275'], // Teal and Darker Blue-Green
+            borderColor: ['#38999a', '#2d6275'],
+            borderWidth: 1
+        }]
+    };
+
+    const myPieChart = new Chart(ctxPie, {
+        type: 'pie',
+        data: overallData,
+        options: {
+            responsive: true,
+            maintainAspectRatio: true,  // Added maintainAspectRatio
+            aspectRatio: 1.2,  // Adjusted aspectRatio
+            plugins: {
+                legend: {
+                    position: 'top',
+                    labels: {
+                        color: '#284763'
+                    }
+                },
+                title: {
+                    display: true,
+                    text: 'Overall Media Statistics',
+                    color: '#284763'
+                }
+            }
+        }
+    });
+</script>
+
+{% endblock %}

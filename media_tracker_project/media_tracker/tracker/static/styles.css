@@ -1,0 +1,155 @@
+/* General Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #fcfcfc; /* Very light gray background */
+    color: #284763; /* Dark blue-gray text for better readability */
+    line-height: 1.6;
+}
+
+/* Header */
+header {
+    background: #284763; /* Dark blue-gray background */
+    color: #fcfcfc; /* Very light gray text */
+    padding: 30px 0 10px 0;
+    text-align: center;
+    margin-bottom: 10px; /* Reduced margin-bottom */
+}
+
+header h1 {
+    font-size: 2.5em;
+    margin-bottom: 0.5em;
+}
+
+/* Navigation */
+nav {
+    background-color: #284763; /* Dark blue-gray background */
+    padding: 10px 0;
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+nav ul li {
+    margin: 0 15px;
+}
+
+nav ul li a {
+    color: #fcfcfc; /* Very light gray text */
+    text-decoration: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    display: block;
+}
+
+nav ul li a:hover {
+    background-color: #327d87; /* Medium blue-green on hover */
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 20px 0;
+    background: #284763; /* Dark blue-gray background */
+    color: #fcfcfc; /* Very light gray text */
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    margin-top: 20px;
+}
+
+/* Main Content */
+main {
+    padding: 20px;
+    min-height: 400px;
+}
+
+/* Additional Styles for the Home Page */
+h3 {
+    margin-top: 20px;
+    color: #2d6275; /* Medium blue-gray heading */
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+/* Statistics Section */
+.statistics {
+    margin-bottom: 30px;
+}
+
+.card {
+    border: none; /* Remove default border */
+    border-radius: 10px; /* Rounded corners for cards */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+    transition: transform 0.3s ease; /* Smooth transition for hover effect */
+    background-color: #fcfcfc; /* Very light gray background */
+    color: #284763; /* Dark blue-gray text */
+}
+
+.card:hover {
+    transform: translateY(-5px); /* Slight lift on hover */
+}
+
+.card-body {
+    padding: 20px;
+}
+
+.display-4 {
+    font-size: 3rem; /* Larger font size for the numbers */
+    color: #38999a; /* Teal color for emphasis */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    header {
+        padding: 15px 0;
+    }
+
+    header h1 {
+        font-size: 2em;
+    }
+
+    nav ul {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    nav ul li {
+        margin: 10px 0;
+    }
+
+    nav ul li a {
+        padding: 8px 12px;
+    }
+
+    main {
+        padding: 15px;
+    }
+
+    .display-4 {
+        font-size: 2rem; /* Adjust font size for smaller screens */
+    }
+
+    /* Stack the statistics cards on smaller screens */
+    .statistics {
+        flex-direction: column;
+    }
+
+    .col-md-4 {
+        width: 100%;
+    }
+}

@@ -1,0 +1,56 @@
+/* charts.css */
+
+/* Styles for the main statistics container */
+.statistics {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 30px;
+}
+
+/* Style each statistic box */
+.stat-box {
+    width: 30%;
+    padding: 20px;
+    background-color: #fcfcfc; /* Very light gray background */
+    border: 1px solid #2d6275; /* Medium blue-gray border */
+    border-radius: 5px;
+    text-align: center;
+    color: #284763; /* Dark blue-gray text */
+}
+
+/* Chart container styling */
+.chart-container,
+.pie-chart-container {
+    flex: 1;
+    padding: 20px;
+    margin: 10px;
+    background-color: #fcfcfc; /* Very light gray background */
+    border-radius: 10px; /* Rounded corners for chart containers */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+    color: #284763; /* Dark blue-gray text */
+}
+
+/* Canvas Styling */
+canvas {
+    width: 100% !important; /* Ensure charts are responsive */
+    height: auto !important;
+}
+
+/* Media query for small screens */
+@media (max-width: 768px) {
+    .statistics {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .stat-box {
+        width: 90%;
+        margin-bottom: 20px;
+    }
+
+    .chart-container,
+    .pie-chart-container {
+        width: 100%; /* Take full width on smaller screens */
+        margin: 10px 0; /* Adjust margin for better spacing */
+    }
+}

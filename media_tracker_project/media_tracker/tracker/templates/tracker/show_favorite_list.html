@@ -1,0 +1,35 @@
+{% extends 'tracker/base.html' %}
+
+{% block title %}Favorite Shows{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1 class="text-center">Your Favorite Shows</h1>
+    <div class="row">
+        {% for show in shows %}
+            <div class="col-md-4">
+                <div class="card mb-4">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">{{ show.title }}</h5>
+                        <p class="card-text">{{ show.duration }} mins</p>
+                        <form action='{% url 'show_favorite' show.pk %}' method='post' class="d-inline">
+                            {% csrf_token %}
+                            <button type='submit' class="btn btn-outline-warning">
+                                {% if show.is_favorite %}
+                                    Unfavorite
+                                {% else %}
+                                    Favorite
+                                {% endif %}
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        {% empty %}
+            <div class="col-12">
+                <p class="text-center">No favorite shows added yet.</p>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
